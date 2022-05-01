@@ -15,9 +15,25 @@ public class Restaurant {
         this.location = location;
         this.openingTime = openingTime;
         this.closingTime = closingTime;
+        //default menu items
+        this.menu.add(new Item("Lemon Rice",73));
+        this.menu.add(new Item("Sambar Rice",45));
+    }
+    public LocalTime getCurrentTime(){ return  LocalTime.now(); }
+
+    public LocalTime getOpeningTime() { return openingTime; }
+
+    public void setOpeningTime(LocalTime openingTime) {
+        this.openingTime = openingTime;
     }
 
-    public boolean isRestaurantOpen() {
+    public LocalTime getClosingTime() { return closingTime; }
+
+    public void setClosingTime(LocalTime closingTime) {
+        this.closingTime = closingTime;
+    }
+
+    public boolean isRestaurantOpen(){
         LocalTime time = LocalTime.now();
         int isStillOpen = time.compareTo(closingTime);
         int isOpen = time.compareTo(openingTime);
@@ -27,7 +43,6 @@ public class Restaurant {
         return false;
     }
 
-    public LocalTime getCurrentTime(){ return  LocalTime.now(); }
 
     public List<Item> getMenu() {
         return this.menu;
@@ -46,8 +61,6 @@ public class Restaurant {
         menu.add(newItem);
     }
 
-
-    
     public void removeFromMenu(String itemName) throws itemNotFoundException {
 
         Item itemToBeRemoved = findItemByName(itemName);
@@ -69,17 +82,11 @@ public class Restaurant {
         return name;
     }
 
-
-    public LocalTime getOpeningTime() { return openingTime; }
-
-    public void setOpeningTime(LocalTime openingTime) {
-        this.openingTime = openingTime;
+    public int getOrderValue(List<Item> item){
+        int totalValue = 0;
+        for (Item myItem : item) {
+            totalValue += myItem.getPrice();
+        }
+        return totalValue;
     }
-
-    public LocalTime getClosingTime() { return closingTime; }
-
-    public void setClosingTime(LocalTime closingTime) {
-        this.closingTime = closingTime;
-    }
-
 }
