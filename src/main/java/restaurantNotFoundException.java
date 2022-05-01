@@ -3,3 +3,4 @@ public class restaurantNotFoundException extends Throwable {
         super(restaurantName);
     }
 }
+
